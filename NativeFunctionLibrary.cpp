@@ -71,14 +71,14 @@ bool UNativeFunctionLibrary::NotNearLocations(FVector RelativeTo, TArray<FVector
 
 
 //PutAllRigidBodiesToSleep
-void UNativeFunctionLibrary::PutAllRigidBodiesToSleep(USkeletalMeshComponent* inMesh) {
+void UNativeFunctionLibrary::PutAllRigidBodiesToSleep(USkeletalMeshComponent* Mesh) {
 
-    if(!inMesh)
+    if(!Mesh)
     {
        return;
     }
 
-        inMesh->PutAllRigidBodiesToSleep();
+        Mesh->PutAllRigidBodiesToSleep();
     
     return;
 }
