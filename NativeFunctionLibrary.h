@@ -45,7 +45,7 @@ class PROJECT_API UNativeFunctionLibrary : public UBlueprintFunctionLibrary
 
 		//PutAllRigidBodiesToSleep
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|SkeletalMesh", Meta = (Keywords = "PutAllRigidBodiesToSleep"))
-		static void PutAllRigidBodiesToSleep(USkeletalMeshComponent* inMesh);
+		static void PutAllRigidBodiesToSleep(USkeletalMeshComponent* Mesh);
 
 
 		//ClearOnScreenDebugMessages
