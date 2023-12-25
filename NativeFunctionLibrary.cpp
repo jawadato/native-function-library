@@ -5,59 +5,59 @@
 
 
 //SortActorsByDistance
-void UNativeFunctionLibrary::SortActorsByDistance(AActor* RelativeTo, TArray<AActor*> inArray, TArray<AActor*>& outArray) {
+void UNativeFunctionLibrary::SortActorsByDistance(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
-    inArray.Sort([RelativeTo](const AActor& A, const AActor& B) {
+    Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
         float DistanceA = A.GetSquaredDistanceTo(RelativeTo);
         float DistanceB = B.GetSquaredDistanceTo(RelativeTo);
         return DistanceA < DistanceB;
     });
-    outArray = inArray;
+    ReturnValue = Array;
 }
 
 
 //SortActorsByDistance
-void UNativeFunctionLibrary::SortActorsByDistance2D(AActor* RelativeTo, TArray<AActor*> inArray, TArray<AActor*>& outArray) {
+void UNativeFunctionLibrary::SortActorsByDistance2D(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
-    inArray.Sort([RelativeTo](const AActor& A, const AActor& B) {
+    Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
         float DistanceA = A.GetHorizontalDistanceTo(RelativeTo);
         float DistanceB = B.GetHorizontalDistanceTo(RelativeTo);
         return DistanceA < DistanceB;
     });
-    outArray = inArray;
+    ReturnValue = Array;
 }
 
 
 //SortActorsByLocation
-void UNativeFunctionLibrary::SortActorsByLocation(FVector RelativeTo, TArray<AActor*> inArray, TArray<AActor*>& outArray) {
+void UNativeFunctionLibrary::SortActorsByLocation(FVector RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
-    inArray.Sort([RelativeTo](const AActor& A, const AActor& B) {
+    Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
         float DistanceA = (A.GetActorLocation() - RelativeTo).Size();
         float DistanceB = (B.GetActorLocation() - RelativeTo).Size();
         return DistanceA < DistanceB;
     });
-    outArray = inArray;
+    ReturnValue = Array;
 }
 
 
 //SortVectorsByDistance
-void UNativeFunctionLibrary::SortVectorsByDistance(FVector RelativeTo, TArray<FVector> inArray, TArray<FVector>& outArray) {
+void UNativeFunctionLibrary::SortVectorsByDistance(FVector RelativeTo, TArray<FVector> Array, TArray<FVector>& ReturnValue) {
 
-    inArray.Sort([RelativeTo](const FVector& A, const FVector& B) {
+    Array.Sort([RelativeTo](const FVector& A, const FVector& B) {
         float DistanceA = FVector::DistSquared(A, RelativeTo);
         float DistanceB = FVector::DistSquared(B, RelativeTo);
         return DistanceA < DistanceB;
     });
-    outArray = inArray;
+    ReturnValue = Array;
 }
 
 
 //NotNearLocations
-bool UNativeFunctionLibrary::NotNearLocations(FVector RelativeTo, TArray<FVector> inArray, float Radius) {
+bool UNativeFunctionLibrary::NotNearLocations(FVector RelativeTo, TArray<FVector> Array, float Radius) {
 
     bool NotInRadius = true;
     float CurrentRadius = 0.f;
-        for (FVector& Position : inArray)
+        for (FVector& Position : Array)
         {
             CurrentRadius = FVector::Dist(Position, RelativeTo);
             if (CurrentRadius <= Radius)
