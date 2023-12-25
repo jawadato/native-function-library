@@ -20,27 +20,27 @@ class PROJECT_API UNativeFunctionLibrary : public UBlueprintFunctionLibrary
 
 		//SortActorsByDistance
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Actor", Meta = (Keywords = "SortActorsByDistance"))
-		static void SortActorsByDistance(AActor* RelativeTo, TArray<AActor*> inArray, TArray<AActor*>& outArray);
+		static void SortActorsByDistance(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue);
 
 
 		//SortActorsByDistance2D
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Actor", Meta = (Keywords = "SortActorsByDistance2D"))
-		static void SortActorsByDistance2D(AActor* RelativeTo, TArray<AActor*> inArray, TArray<AActor*>& outArray);
+		static void SortActorsByDistance2D(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue);
 
 
 		//SortActorsByLocation
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Actor", Meta = (Keywords = "SortActorsByLocation"))
-		static void SortActorsByLocation(FVector RelativeTo, TArray<AActor*> inArray, TArray<AActor*>& outArray);
+		static void SortActorsByLocation(FVector RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue);
 
 
 		//SortVectorsByDistance
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Vector", Meta = (Keywords = "SortVectorsByDistance"))
-		static void SortVectorsByDistance(FVector RelativeTo, TArray<FVector> inArray, TArray<FVector>& outArray);
+		static void SortVectorsByDistance(FVector RelativeTo, TArray<FVector> Array, TArray<FVector>& ReturnValue);
 
 
 		//NotNearLocations
 		UFUNCTION(BlueprintPure, Category = "Jawadato|NativeFunctionLibrary|Vector", Meta = (Keywords = "NotNearLocations"))
-		static bool NotNearLocations(FVector RelativeTo, TArray<FVector> inArray, float Radius);		
+		static bool NotNearLocations(FVector RelativeTo, TArray<FVector> Array, float Radius);		
 
 
 		//PutAllRigidBodiesToSleep
