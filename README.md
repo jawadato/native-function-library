@@ -6,7 +6,7 @@ How to use:
 
 > - Add a new Blueprint Function Library C++ class to your project, call it "NativeFunctionLibrary" for easiest integration.
 > - Pay attention to the "YOURPROJECT_API" part, copy whatever this name is.
-> - Paste the contents of both header and cpp file from this repo into your newly created class's respective files.
+> - Paste the contents of both the header and cpp files from this repo into the respective files of your newly created class.
 > - Replace "PROJECT_API" with previously copied name.
 > - Save and compile the files, you can compile from within the Unreal Editor.
 
