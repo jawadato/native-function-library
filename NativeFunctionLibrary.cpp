@@ -13,7 +13,7 @@ void UNativeFunctionLibrary::SortActorsByDistance(AActor* RelativeTo, TArray<AAc
 }
 
 
-//SortActorsByDistance
+//SortActorsByDistance2D
 void UNativeFunctionLibrary::SortActorsByDistance2D(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
     Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
