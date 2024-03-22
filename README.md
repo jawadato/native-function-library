@@ -10,6 +10,6 @@ How to use:
 > - Replace "PROJECT_API" with previously copied name.
 > - Save and compile the files, you can compile from within the Unreal Editor.
 
-Afterwards, the functions should show up in the engine. These functions should work with any engine versions above 4.27.
+Afterwards, the functions will be accessible through Blueprint graphs and should work with engine versions 4.27 and above.
 
 > - For engine versions 5 and above, if you are relying on the Editor to compile the code then you may want to check the “Force Compilation at Startup” from the editor preferences otherwise you may need to manually compile the code every time you open the project.
