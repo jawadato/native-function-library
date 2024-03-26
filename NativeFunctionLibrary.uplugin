@@ -1,0 +1,27 @@
+{
+	"FileVersion": 3,
+	"Version": 100,
+	"VersionName": "1.0.0",
+	"FriendlyName": "NativeFunctionLibrary",
+	"Description": "Some additional Blueprint functions.",
+	"Category": "Jawadato",
+	"CreatedBy": "Jawadato",
+	"CreatedByURL": "https://www.jawadato.com",
+	"DocsURL": "https://github.com/jawadato/native-function-library",
+	"MarketplaceURL": "com.epicgames.launcher://ue/marketplace/product/0665044cc8064063984a7155646595a8",
+	"SupportURL": "",
+	"CanContainContent": false,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "NativeFunctionLibrary",
+			"Type": "Runtime",
+			"LoadingPhase": "PreLoadingScreen",
+			"PlatformAllowList": [
+				"Win64"
+			]
+		}
+	]
+}
