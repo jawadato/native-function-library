@@ -20,3 +20,4 @@ From Source:
 Example Project:
 
 > - An [Example Project](https://drive.filen.io/d/3ac93fb0-d49e-4d3c-af3a-0d656b3cd80c#Lw2WnEue2EQm7o60f2CWLYlHXLTkIg42) is available.
+> - Place the plugin into the Plugins folder of the project or simply enable it in the project's plugin settings if using Marketplace version.
