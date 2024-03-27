@@ -6,6 +6,8 @@ A handful of additional functions for Unreal Engine. Check usage instructions be
 From Release:
 
 > - Grab the prebuilt plugin from the [Unreal Marketplace](https://www.unrealengine.com/marketplace/en-US/profile/jawadato).
+> - Install the plugin to your engine then enable it in your project.
+> - Search for the function names in a Blueprint graph and they should appear.
 
 
 From Source:
