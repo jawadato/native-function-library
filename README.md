@@ -15,3 +15,8 @@ From Source:
 > - Create a new UE project.
 > - Add the plugin into the Plugins directory of the newly created project. Open the uproject file and let the Editor compile the plugin using the VS build tools installed on your system.
 > - For engine versions 5 and above, if you are relying on the Editor to compile the code then you may want to check the “Force Compilation at Startup” from the editor preferences otherwise you may need to manually compile the code every time you open the project.
+
+
+Example Project:
+
+> - An [Example Project](https://drive.filen.io/d/3ac93fb0-d49e-4d3c-af3a-0d656b3cd80c#Lw2WnEue2EQm7o60f2CWLYlHXLTkIg42) is available.
