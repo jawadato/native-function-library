@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+// © 2024 jawadato
 
 #include "NativeFunctionLibrary.h"
 

@@ -1,4 +1,4 @@
-// Some copyright should be here...
+// © 2024 jawadato
 
 using UnrealBuildTool;
 

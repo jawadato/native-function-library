@@ -165,9 +165,11 @@ void UNativeFunctionLibraryBPLibrary::StringToClipboard(const FString& String) {
 
 
 //ClipboardToString
-void UNativeFunctionLibraryBPLibrary::ClipboardToString(FString& String) {
+FString UNativeFunctionLibraryBPLibrary::ClipboardToString() {
   
+    FString String;
     FPlatformApplicationMisc::ClipboardPaste(String);
+    return String;
 }
 
 
