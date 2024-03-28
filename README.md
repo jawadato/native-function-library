@@ -1,4 +1,4 @@
-A handful of additional functions for Unreal Engine. Check usage instructions below.
+A handful of additional functions for Unreal Engine. Documentation avialable [here](https://jawadato.github.io/native-function-library-docs), check usage instructions below.
 
 ![github_scrn_000](https://github.com/jawadato/native-function-library/assets/18325896/e11b2292-6d50-4b19-b616-6bf70e663ebf)
 
@@ -19,5 +19,5 @@ From Source:
 
 Example Project:
 
-> - An [Example Project](https://drive.filen.io/d/3ac93fb0-d49e-4d3c-af3a-0d656b3cd80c#Lw2WnEue2EQm7o60f2CWLYlHXLTkIg42) is available.
+> - An [Example Project](https://drive.filen.io/d/aab67738-3d1b-4014-839f-50f736c02fdb#cfM0kD2iJUjP9wi7GqrC9asKTAfpyyOP) is available.
 > - Place the plugin into the Plugins folder of the project or simply enable it in the project's plugin settings if using Marketplace version.
