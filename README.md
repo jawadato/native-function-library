@@ -19,5 +19,5 @@ From Source:
 
 Example Project:
 
-> - An [Example Project](https://drive.filen.io/d/aab67738-3d1b-4014-839f-50f736c02fdb#cfM0kD2iJUjP9wi7GqrC9asKTAfpyyOP) is available.
+> - An [Example Project](https://jawadato.itch.io/native-function-library-example) is available.
 > - Place the plugin into the Plugins folder of the project or simply enable it in the project's plugin settings if using Marketplace version.
