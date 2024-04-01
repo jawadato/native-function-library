@@ -1,6 +1,6 @@
 A handful of additional functions for Unreal Engine. Documentation avialable [here](https://jawadato.github.io/native-function-library-docs), check usage instructions below.
 
-![github_scrn_000](https://github.com/jawadato/native-function-library/assets/18325896/e11b2292-6d50-4b19-b616-6bf70e663ebf)
+![scrn_nodes_000_web](https://github.com/jawadato/native-function-library/assets/18325896/106b5a36-b229-4186-ab50-b25414d92470)
 
 
 From Release:
