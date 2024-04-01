@@ -114,18 +114,18 @@ void UNativeFunctionLibraryBPLibrary::AverageSeparationBetweenVectors(TArray<FVe
 //NotNearLocations
 bool UNativeFunctionLibraryBPLibrary::NotNearLocations(FVector RelativeTo, TArray<FVector> Array, float Radius) {
 
-    bool NotInRadius = true;
+    bool bNotInRadius = true;
     float CurrentRadius = 0.f;
         for (FVector& Position : Array)
         {
             CurrentRadius = FVector::Dist(Position, RelativeTo);
             if (CurrentRadius <= Radius)
                 {
-                    NotInRadius = false;
+                    bNotInRadius = false;
                     break;
                 }                         
         };
-    return NotInRadius;
+    return bNotInRadius;
 }
 
 
@@ -187,8 +187,47 @@ FString UNativeFunctionLibraryBPLibrary::ColorToHex(FColor Color) {
 }
 
 
+//StringToFile
+bool UNativeFunctionLibraryBPLibrary::StringToFile(FString String, const FString Filename) {
+
+    const TCHAR* FilePath = *Filename;
+    return FFileHelper::SaveStringToFile(String, FilePath);
+}
+
+
+//FileToString
+bool UNativeFunctionLibraryBPLibrary::FileToString(FString& String, const FString Filename) {
+
+    const TCHAR* FilePath = *Filename;
+    return FFileHelper::LoadFileToString(String, FilePath);
+}
+
+
 //FlushInputs
 void UNativeFunctionLibraryBPLibrary::FlushInputs(APlayerController* PlayerController) {
   
     PlayerController->FlushPressedKeys();
+}
+
+
+//GetInputHeldDuration
+float UNativeFunctionLibraryBPLibrary::GetInputHeldDuration(APlayerController* PlayerController, FKey Key) {
+  
+    return PlayerController->GetInputKeyTimeDown(Key);
+}
+
+
+//GetHitResultAtScreenPosition
+bool UNativeFunctionLibraryBPLibrary::GetHitResultAtScreenPosition(APlayerController* PlayerController, const FVector2D ScreenPosition, const ETraceTypeQuery TraceChannel, bool bTraceComplex, FHitResult& HitResult) {
+  
+    return PlayerController->GetHitResultAtScreenPosition(ScreenPosition, TraceChannel, bTraceComplex, HitResult);
+}
+
+
+//ClientFadeCamera
+void UNativeFunctionLibraryBPLibrary::ClientFadeCamera(APlayerController* PlayerController, bool bFadeAudio, bool bHoldWhenFinished, FLinearColor FadeColor, float FadeAlphaStart, float FadeAlphaStop, float FadeDuration) {
+
+    FColor ConvertedFadeColor = FadeColor.ToFColor(true);
+    FVector2D FadeAlpha = FVector2D(FadeAlphaStart, FadeAlphaStop);
+    PlayerController->ClientSetCameraFade(true, ConvertedFadeColor, FadeAlpha, FadeDuration, bFadeAudio, bHoldWhenFinished);
 }

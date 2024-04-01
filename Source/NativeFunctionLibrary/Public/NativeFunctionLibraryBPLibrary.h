@@ -4,12 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "Engine/Engine.h"
+#include "Misc/FileHelper.h"
+#include "Misc/App.h"
+#include "Math/Color.h"
 #include "HAL/PlatformApplicationMisc.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "NativeFunctionLibraryBPLibrary.generated.h"
+
 
 UCLASS()
 class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
@@ -19,7 +23,7 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		//SortActorsByDistance
 		/** 
 		* Sorts an array of actors relative to distance to the provided actor from closest to furthest.
-		* @param	RelativeTo Array to sort against
+		* @param	RelativeTo Actor to sort against
 		* @param	Array Array to sort
 		* @return Sorted Array from closest to furthest
 		*/
@@ -30,7 +34,7 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		//SortActorsByDistance2D
 		/** 
 		* Sorts an array of actors relative to horizontal distance to the provided actor from closest to furthest.
-		* @param	RelativeTo Array to sort against
+		* @param	RelativeTo Actor to sort against
 		* @param	Array Array to sort
 		* @return Sorted Array from closest to furthest		
 		*/
@@ -41,7 +45,7 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		//SortActorsByLocation
 		/** 
 		* Sorts an array of actors relative to distance to the provided location vector from closest to furthest.
-		* @param	RelativeTo Array to sort against
+		* @param	RelativeTo Location to sort against
 		* @param	Array Array to sort
 		* @return Sorted Array from closest to furthest				
 		*/
@@ -52,7 +56,7 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		//SortVectorsByDistance
 		/** 
 		* Sorts an array of vectors relative to distance to the provided location vector from closest to furthest.
-		* @param	RelativeTo Array to sort against
+		* @param	RelativeTo Location to sort against
 		* @param	Array Array to sort
 		* @return Sorted Array from closest to furthest
 		*/
@@ -100,8 +104,8 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		* Compares an array of vectors against a provided location vector and returns true if none in the array is within a certain radius of the provided location vector.
 		* @param	RelativeTo Location vector to compare against
 		* @param	Array Array containing the vectors
-		* @param	Radius Radius within which to check
-		* @return True or false based on check result
+		* @param	Radius Radius within which to query
+		* @return True or false based on query result
 		*/		
 		UFUNCTION(BlueprintPure, Category = "Jawadato|NativeFunctionLibrary|Vector", Meta = (Keywords = "NotNearLocations"))
 		static bool NotNearLocations(FVector RelativeTo, TArray<FVector> Array, float Radius);
@@ -127,8 +131,8 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		//LaunchedWithCommandLineArgument
 		/** 
 		* Returns true if a specific command line flag was used during launch.
-		* @param	Argument Command line argument to check against
-		* @return True or false based on check result
+		* @param	Argument Command line argument to query against
+		* @return True or false based on query result
 		*/		
 		UFUNCTION(BlueprintPure, Category = "Jawadato|NativeFunctionLibrary|CommandLine", Meta = (Keywords = "LaunchedWithCommandLineArgument"))
 		static bool LaunchedWithCommandLineArgument(FString Argument = "");
@@ -172,11 +176,73 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		static FString ColorToHex(FColor Color);
 
 
+		//StringToFile
+		/** 
+		* Writes provided String to a File.
+		* @param	String String which to save
+		* @param	Filename File path to use		
+		* @return Result of write operation
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|String", Meta = (Keywords = "StringToFile"))
+		static bool StringToFile(FString String, const FString Filename);
+
+
+		//FileToString
+		/** 
+		* Loads provided File to a String.
+		* @param	String Loaded String
+		* @param	Filename File path to use		
+		* @return Result of read operation
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|String", Meta = (Keywords = "FileToString"))
+		static bool FileToString(FString& String, const FString Filename);
+
+
 		//FlushInputs
 		/** 
 		* Flushes all accumulated inputs.
 		* @param	PlayerController Player Controller which needs to be flushed
 		*/		
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Input", Meta = (Keywords = "FlushInputs"))
-		static void FlushInputs(APlayerController* PlayerController);		
+		static void FlushInputs(APlayerController* PlayerController);
+
+
+		//GetInputHeldDuration
+		/** 
+		* Queries how long a particular input key has been held down for.
+		* @param	PlayerController Player Controller which to query against
+		* @param	Key Key to query
+		* @return	Duration in seconds of how long the Key has been held for
+		*/		
+		UFUNCTION(BlueprintPure, Category = "Jawadato|NativeFunctionLibrary|Input", Meta = (Keywords = "GetInputHeldDuration"))
+		static float GetInputHeldDuration(APlayerController* PlayerController, FKey Key);		
+
+
+		//GetHitResultAtScreenPosition
+		/** 
+		* Does a collision query at the provided position on the screen.
+		* @param	PlayerController Player Controller to use
+		* @param	ScreenPosition Screen position to trace at
+		* @param	TraceChannel Trace collision channel to use
+		* @param	bTraceComplex Should trace complex collision								
+		* @param	HitResult Result of trace
+		* @return	True or false depending on hit
+		*/		
+		UFUNCTION(BlueprintPure, Category = "Jawadato|NativeFunctionLibrary|Player", Meta = (Keywords = "GetHitResultAtScreenPosition"))
+		static bool GetHitResultAtScreenPosition(APlayerController* PlayerController, const FVector2D ScreenPosition, const ETraceTypeQuery TraceChannel, bool bTraceComplex, FHitResult& HitResult);
+		
+
+		//ClientFadeCamera
+		/** 
+		* Smoothly interpolates the camera to the provided Linear Color over a certain duration.
+		* @param	PlayerController Player Controller to use
+		* @param	bFadeAudio Should also fade audio
+		* @param	bHoldWhenFinished Should retain fade color once alpha reaches stop value
+		* @param	FadeColor Linear Color structure used for the fade
+		* @param	FadeAlphaStart At alpha which to start the fade at
+		* @param	FadeAlphaStop Alpha towards the fade interpolates to
+		* @param	FadeDuration The interpolation duration in seconds
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Player", Meta = (Keywords = "ClientFadeCamera", AdvancedDisplay = "2"))
+		static void ClientFadeCamera(APlayerController* PlayerController, bool bFadeAudio, bool bHoldWhenFinished, FLinearColor FadeColor = FLinearColor(0.0, 0.66, 1.0), float FadeAlphaStart = 0.f, float FadeAlphaStop = 1.f, float FadeDuration = 1.f);	
 };
