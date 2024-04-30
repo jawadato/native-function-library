@@ -10,7 +10,7 @@ UNativeFunctionLibraryBPLibrary::UNativeFunctionLibraryBPLibrary(const FObjectIn
 
 }
 
-//SortActorsByDistance
+//MARK: SortActorsByDistance
 void UNativeFunctionLibraryBPLibrary::SortActorsByDistance(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
     Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
@@ -22,7 +22,7 @@ void UNativeFunctionLibraryBPLibrary::SortActorsByDistance(AActor* RelativeTo, T
 }
 
 
-//SortActorsByDistance2D
+//MARK: SortActorsByDistance2D
 void UNativeFunctionLibraryBPLibrary::SortActorsByDistance2D(AActor* RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
     Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
@@ -34,7 +34,7 @@ void UNativeFunctionLibraryBPLibrary::SortActorsByDistance2D(AActor* RelativeTo,
 }
 
 
-//SortActorsByLocation
+//MARK: SortActorsByLocation
 void UNativeFunctionLibraryBPLibrary::SortActorsByLocation(FVector RelativeTo, TArray<AActor*> Array, TArray<AActor*>& ReturnValue) {
 
     Array.Sort([RelativeTo](const AActor& A, const AActor& B) {
@@ -46,7 +46,7 @@ void UNativeFunctionLibraryBPLibrary::SortActorsByLocation(FVector RelativeTo, T
 }
 
 
-//SortVectorsByDistance
+//MARK: SortVectorsByDistance
 void UNativeFunctionLibraryBPLibrary::SortVectorsByDistance(FVector RelativeTo, TArray<FVector> Array, TArray<FVector>& ReturnValue) {
 
     Array.Sort([RelativeTo](const FVector& A, const FVector& B) {
@@ -58,7 +58,7 @@ void UNativeFunctionLibraryBPLibrary::SortVectorsByDistance(FVector RelativeTo, 
 }
 
 
-//RandomVectorsInExtent
+//MARK: RandomVectorsInExtent
 void UNativeFunctionLibraryBPLibrary::RandomVectorsInBoxExtent(int32 Amount, FVector InBoxExtent, FVector Origin, TArray<FVector>& ReturnValue) {
 
     TArray<FVector> Vectors;
@@ -74,7 +74,7 @@ void UNativeFunctionLibraryBPLibrary::RandomVectorsInBoxExtent(int32 Amount, FVe
 }
 
 
-//RandomVectorsInExtentFromStream
+//MARK: RandomVectorsInExtentFromStream
 void UNativeFunctionLibraryBPLibrary::RandomVectorsInBoxExtentFromStream(int32 Amount, FVector InBoxExtent, FVector Origin, FRandomStream Stream, TArray<FVector>& ReturnValue) {
 
     TArray<FVector> Vectors;
@@ -90,7 +90,7 @@ void UNativeFunctionLibraryBPLibrary::RandomVectorsInBoxExtentFromStream(int32 A
 }
 
 
-//AverageSeparationBetweenVectors
+//MARK: AverageSeparationBetweenVectors
 void UNativeFunctionLibraryBPLibrary::AverageSeparationBetweenVectors(TArray<FVector> Array, float& ReturnValue) {
 
     float TotalDistance = 0.f;
@@ -111,7 +111,7 @@ void UNativeFunctionLibraryBPLibrary::AverageSeparationBetweenVectors(TArray<FVe
 }
 
 
-//NotNearLocations
+//MARK: NotNearLocations
 bool UNativeFunctionLibraryBPLibrary::NotNearLocations(FVector RelativeTo, TArray<FVector> Array, float Radius) {
 
     bool bNotInRadius = true;
@@ -129,7 +129,7 @@ bool UNativeFunctionLibraryBPLibrary::NotNearLocations(FVector RelativeTo, TArra
 }
 
 
-//PutAllRigidBodiesToSleep
+//MARK: PutAllRigidBodiesToSleep
 void UNativeFunctionLibraryBPLibrary::PutAllRigidBodiesToSleep(USkeletalMeshComponent* Mesh) {
 
     if(!Mesh)
@@ -143,28 +143,28 @@ void UNativeFunctionLibraryBPLibrary::PutAllRigidBodiesToSleep(USkeletalMeshComp
 }
 
 
-//ClearOnScreenDebugMessages
+//MARK: ClearOnScreenDebugMessages
 void UNativeFunctionLibraryBPLibrary::ClearOnScreenDebugMessages() {
     
     GEngine->ClearOnScreenDebugMessages();
 }
 
 
-//LaunchedWithCommandLineArgument
+//MARK: LaunchedWithCommandLineArgument
 bool UNativeFunctionLibraryBPLibrary::LaunchedWithCommandLineArgument(FString Argument) {
 
     return FParse::Param(FCommandLine::Get(), *Argument);
 }
 
 
-//StringToClipboard
+//MARK: StringToClipboard
 void UNativeFunctionLibraryBPLibrary::StringToClipboard(const FString& String) {
  
     FPlatformApplicationMisc::ClipboardCopy(*String);
 }
 
 
-//ClipboardToString
+//MARK: ClipboardToString
 FString UNativeFunctionLibraryBPLibrary::ClipboardToString() {
   
     FString String;
@@ -173,21 +173,21 @@ FString UNativeFunctionLibraryBPLibrary::ClipboardToString() {
 }
 
 
-//HexToColor
+//MARK: HexToColor
 FColor UNativeFunctionLibraryBPLibrary::HexToColor(FString Hex) {
   
     return FColor::FromHex(Hex);
 }
 
 
-//ColorToHex
+//MARK: ColorToHex
 FString UNativeFunctionLibraryBPLibrary::ColorToHex(FColor Color) {
    
     return Color.ToHex();
 }
 
 
-//StringToFile
+//MARK: StringToFile
 bool UNativeFunctionLibraryBPLibrary::StringToFile(FString String, const FString Filename) {
 
     const TCHAR* FilePath = *Filename;
@@ -195,7 +195,15 @@ bool UNativeFunctionLibraryBPLibrary::StringToFile(FString String, const FString
 }
 
 
-//FileToString
+//MARK: StringArrayToFile
+bool UNativeFunctionLibraryBPLibrary::StringArrayToFile(const TArray<FString>& Strings, const FString Filename) {
+
+    const TCHAR* FilePath = *Filename;
+    return FFileHelper::SaveStringArrayToFile(Strings, FilePath);
+}
+
+
+//MARK: FileToString
 bool UNativeFunctionLibraryBPLibrary::FileToString(FString& String, const FString Filename) {
 
     const TCHAR* FilePath = *Filename;
@@ -203,31 +211,85 @@ bool UNativeFunctionLibraryBPLibrary::FileToString(FString& String, const FStrin
 }
 
 
-//FlushInputs
+//MARK: FileToStringArray
+bool UNativeFunctionLibraryBPLibrary::FileToStringArray(TArray<FString>& Strings, const FString Filename) {
+
+    const TCHAR* FilePath = *Filename;
+    return FFileHelper::LoadFileToStringArray(Strings, FilePath);
+}
+
+
+//MARK: FlushInputs
 void UNativeFunctionLibraryBPLibrary::FlushInputs(APlayerController* PlayerController) {
   
     PlayerController->FlushPressedKeys();
 }
 
 
-//GetInputHeldDuration
+//MARK: GetInputHeldDuration
 float UNativeFunctionLibraryBPLibrary::GetInputHeldDuration(APlayerController* PlayerController, FKey Key) {
   
     return PlayerController->GetInputKeyTimeDown(Key);
 }
 
 
-//GetHitResultAtScreenPosition
+//MARK: GetHitResultAtScreenPosition
 bool UNativeFunctionLibraryBPLibrary::GetHitResultAtScreenPosition(APlayerController* PlayerController, const FVector2D ScreenPosition, const ETraceTypeQuery TraceChannel, bool bTraceComplex, FHitResult& HitResult) {
   
     return PlayerController->GetHitResultAtScreenPosition(ScreenPosition, TraceChannel, bTraceComplex, HitResult);
 }
 
 
-//ClientFadeCamera
+//MARK: ClientFadeCamera
 void UNativeFunctionLibraryBPLibrary::ClientFadeCamera(APlayerController* PlayerController, bool bFadeAudio, bool bHoldWhenFinished, FLinearColor FadeColor, float FadeAlphaStart, float FadeAlphaStop, float FadeDuration) {
 
     FColor ConvertedFadeColor = FadeColor.ToFColor(true);
     FVector2D FadeAlpha = FVector2D(FadeAlphaStart, FadeAlphaStop);
     PlayerController->ClientSetCameraFade(true, ConvertedFadeColor, FadeAlpha, FadeDuration, bFadeAudio, bHoldWhenFinished);
+}
+
+
+//MARK: LocationOnScreen
+bool UNativeFunctionLibraryBPLibrary::LocationOnScreen(APlayerController* PlayerController, FVector Location)
+
+{
+    if(!GEngine && !PlayerController)
+    {
+        return false;
+    } 
+
+    const FVector2D ViewportSize = FVector2D(GEngine->GameViewport->Viewport->GetSizeXY());
+
+    FVector CameraLocation;
+    FRotator CameraRotation;
+
+    PlayerController->GetPlayerViewPoint(CameraLocation, CameraRotation);
+
+    const FVector Direction = Location - CameraLocation;
+    FVector ForwardVector = CameraRotation.Vector();
+    FVector NormalizedDirection = Direction.GetSafeNormal();
+
+    float DotProduct = FVector::DotProduct(ForwardVector, NormalizedDirection);
+    bool bBehindCamera = (DotProduct < 0);
+    FVector2D ScreenPosition = FVector2D();    
+
+    if(bBehindCamera)
+    {
+        FVector NewLocation = CameraLocation + Direction * -1.f;
+
+        PlayerController->ProjectWorldLocationToScreen(NewLocation, ScreenPosition);
+
+        ScreenPosition.X = ViewportSize.X - ScreenPosition.X;
+        ScreenPosition.Y = ViewportSize.Y - ScreenPosition.Y;
+    }
+    else
+    {
+       PlayerController->ProjectWorldLocationToScreen(Location, ScreenPosition);
+    }
+
+    if(ScreenPosition.X >= 0.f && ScreenPosition.X <= ViewportSize.X && ScreenPosition.Y >= 0.f && ScreenPosition.Y <= ViewportSize.Y && !bBehindCamera)
+    {
+        return true;
+    }
+	return false;
 }

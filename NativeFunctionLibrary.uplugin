@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
-	"Version": 101,
-	"VersionName": "1.1.0",
+	"Version": 102,
+	"VersionName": "1.2.0",
 	"FriendlyName": "NativeFunctionLibrary",
 	"Description": "Some additional Blueprint functions.",
 	"Category": "Jawadato",
