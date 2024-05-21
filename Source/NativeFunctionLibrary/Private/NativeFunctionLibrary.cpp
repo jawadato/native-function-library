@@ -1,4 +1,4 @@
-// © 2024 jawadato
+// Copyright (c) 2024 jawadato
 
 #include "NativeFunctionLibrary.h"
 

@@ -1,4 +1,4 @@
-// © 2024 jawadato
+// Copyright (c) 2024 jawadato
 
 #pragma once
 
