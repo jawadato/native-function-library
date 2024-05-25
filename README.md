@@ -10,7 +10,7 @@ Discord server available [here](https://discord.gg/mGbAhp56JX).
 
 # Documentation
 
-https://jawadato.github.io/native-function-library-docs
+Documentation available [here](https://jawadato.github.io/native-function-library-docs).
 
 # From Release
 
