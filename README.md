@@ -4,6 +4,9 @@ A handful of additional functions for Unreal Engine. Documentation and usage ins
 
 ![scrn_nodes_000_120_web](https://github.com/jawadato/native-function-library/assets/18325896/411763cc-49cb-42f2-8efb-c463df733be0)
 
+# Discord
+
+Discord server available [here](https://discord.gg/mGbAhp56JX).
 
 # Documentation
 
@@ -14,7 +17,6 @@ https://jawadato.github.io/native-function-library-docs
 - Grab the prebuilt plugin from the [Unreal Marketplace](https://www.unrealengine.com/marketplace/en-US/profile/jawadato).
 - Install the plugin to your engine then enable it in your project.
 - Search for the function names in a Blueprint graph and they should appear.
-
 
 # From Source
 
