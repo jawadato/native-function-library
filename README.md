@@ -29,3 +29,4 @@ Documentation available [here](https://jawadato.github.io/native-function-librar
 
 - An [Example Project](https://jawadato.itch.io/native-function-library-example) is available.
 - Place the plugin into the Plugins folder of the project or simply enable it in the project's plugin settings if using Marketplace version.
+- Project is compatible with engine versions 5.3 and higher.
