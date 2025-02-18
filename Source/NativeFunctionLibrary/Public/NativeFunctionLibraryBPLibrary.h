@@ -11,13 +11,14 @@
 #include "Math/Color.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "HAL/PlatformApplicationMisc.h"
+#include "UObject/UObjectIterator.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "NativeFunctionLibraryBPLibrary.generated.h"
 
 
-UCLASS()
+UCLASS(Meta = (DisplayName = "Native Function Library"))
 class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_UCLASS_BODY()
@@ -158,6 +159,15 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		static FString ClipboardToString();
 
 
+		//MARK: GetWorldObjectCount
+		/** 
+		* Retrieves the number of UObjects present in the world.
+		* @return	UObject count
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Misc", Meta = (Keywords = "GetWorldObjectCount", WorldContext = "WorldContext"))
+		static int32 GetWorldObjectCount(UObject* WorldContext);
+
+
 		//MARK: HexToColor
 		/** 
 		* Converts provided Hex color code to a Color Structure.
@@ -220,6 +230,140 @@ class UNativeFunctionLibraryBPLibrary : public UBlueprintFunctionLibrary
 		*/		
 		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|String", Meta = (Keywords = "FileToStringArray"))
 		static bool FileToStringArray(TArray<FString>& Strings, const FString Filename);
+
+
+		//MARK: StringArrayToSorted
+		/** 
+		* Creates a copy of the provided String Array then sorts the copy in ascending order and returns the value.
+		* @param	Strings Strings to sort
+		* @return	Result of sort operation
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|String", Meta = (Keywords = "StringArrayToSorted"))
+		static TArray<FString> StringArrayToSorted(const TArray<FString>& Strings);
+
+
+		//MARK: IntegerArrayToSorted
+		/** 
+		* Creates a copy of the provided Integer Array then sorts the copy in ascending order and returns the value.
+		* @param	Integers Integers to sort
+		* @return	Result of sort operation
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Integer", Meta = (Keywords = "IntegerArrayToSorted"))
+		static TArray<int32> IntegerArrayToSorted(const TArray<int32>& Integers);
+
+
+		//MARK: FloatArrayToSorted
+		/** 
+		* Creates a copy of the provided Float Array then sorts the copy in ascending order and returns the value.
+		* @param	Floats Floats to sort
+		* @return	Result of sort operation
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Float", Meta = (Keywords = "FloatArrayToSorted"))
+		static TArray<float> FloatArrayToSorted(const TArray<float>& Floats);
+
+
+		//MARK: CalculateMean
+		/** 
+		* Provided a dataset in form of a Float array, returns the Mean value.
+		* @param	Data Float array to find Mean value within
+		* @return	Mean value
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateMean"))
+		static float CalculateMean(const TArray<float>& Data);
+
+
+		//MARK: CalculateWeightedMean
+		/** 
+		* Provided two Float arrays, returns the Weighted Mean value.
+		* Both arrays must consist of equal amount of entries.
+		* Weights are mapped onto data based on matching indices.
+		* @param	Data Float array to find Weighted Mean value within
+		* @param	Weights Float array comprising of weights needed to evaluate the data		
+		* @return	Weighted Mean value
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateWeightedMean"))
+		static float CalculateWeightedMean(const TArray<float>& Data, const TArray<float>& Weights);
+
+
+		//MARK: CalculateMedian
+		/** 
+		* Provided a dataset in form of a Float array, returns the Median value.
+		* @param	Data Float array to find Median value within
+		* @return	Median value
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateMedian"))
+		static float CalculateMedian(const TArray<float>& Data);
+
+
+		//MARK: CalculateStatisticalRange
+		/** 
+		* Provided a dataset in form of a Float array, returns the Statistical Range value.
+		* @param	Data Float array to find Range value within
+		* @return	Range value
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateStatisticalRange"))
+		static float CalculateStatisticalRange(const TArray<float>& Data);	
+
+
+		//MARK: CalculateStandardDeviation
+		/** 
+		* Provided a dataset in form of a Float array, returns the Standard Deviation value.
+		* Optionally treat data as "Population" instead of "Sample".
+		* @param	bPopulation Set true to treat data as "Population"; treat as "Sample" otherwise		
+		* @param	Data Float array to find Standard Deviation value within
+		* @return	Standard Deviation value
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateStandardDeviation"))
+		static float CalculateStandardDeviation(bool bPopulation, const TArray<float>& Data);	
+
+
+		//MARK: CalculateStatisticalZScore
+		/** 
+		* Provided an Observed Value along with the Mean and Standard Deviation of a dataset, returns the Standard Score (Z-Score).
+		* @param	ObservedValue Value to find Z-Score for
+		* @param	Mean Mean value
+		* @param	StandardDeviation Standard Deviation value
+		* @return	Z-Score
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (DisplayName = "Calculate Statistical Z-Score", Keywords = "CalculateStatisticalZScore"))
+		static float CalculateStatisticalZScore(float ObservedValue, float Mean, float StandardDeviation);
+
+
+		//MARK: CalculateRelativeRisk
+		/** 
+		* Provided a population size, how many develop a risk without exposure and how many do, returns the relative risk.
+		* Optionally multiply by 100 to return the percentage figure.
+		* @param	PopulationSize Size of the population
+		* @param	WithoutExposure Subset of population without exposure or placebo (background) Subset
+		* @param	WithExposure Subset of population with exposure
+		* @param	bPercentage Multiply by 100
+		* @return	Relative risk
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateRelativeRisk"))
+		static float CalculateRelativeRisk(float PopulationSize, float WithoutExposure, float WithExposure, bool bPercentage);
+
+
+		//MARK: CalculateNumberOfPairs
+		/** 
+		* Provided the size of a finite set of elements, returns the number of pairs of elements.
+		* Uses the Triangular Numbers method.
+		* @param	NumberOfElements Amount of elements
+		* @return	Number of element pairs
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateNumberOfPairs"))
+		static int32 CalculateNumberOfPairs(int32 NumberOfElements);
+
+
+		//MARK: CalculateLikelihood
+		/** 
+		* Given the probability of an individual occurrence, returns the likelihood of said occurrence if repeated n times with the same probability.
+		* Return a 0 to 1 percentage value.
+		* @param	Probability Probability of an individual occurrence
+		* @param	RepeatCount Likelihood of occurrence after trying this many times
+		* @return	Likelihood
+		*/		
+		UFUNCTION(BlueprintCallable, Category = "Jawadato|NativeFunctionLibrary|Statistics", Meta = (Keywords = "CalculateLikelihood"))
+		static float CalculateLikelihood(float Probability, int32 RepeatCount);
 
 
 		//MARK: FlushInputs

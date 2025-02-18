@@ -150,7 +150,7 @@ bool UNativeFunctionLibraryBPLibrary::NotNearLocations(FVector RelativeTo, TArra
 //MARK: PutAllRigidBodiesToSleep
 void UNativeFunctionLibraryBPLibrary::PutAllRigidBodiesToSleep(USkeletalMeshComponent* Mesh)
 {
-    if(!Mesh)
+    if (!Mesh)
     {
        return;
     }
@@ -190,6 +190,23 @@ FString UNativeFunctionLibraryBPLibrary::ClipboardToString()
     FPlatformApplicationMisc::ClipboardPaste(String);
  
     return String;
+}
+
+//MARK: GetWorldObjectCount
+int32 UNativeFunctionLibraryBPLibrary::GetWorldObjectCount(UObject* WorldContext)
+{ 
+    int32 Count = 0;
+
+    for (TObjectIterator<UObject> ObjectIterator; ObjectIterator; ++ObjectIterator)
+    {
+        if (ObjectIterator->GetWorld() == WorldContext ->GetWorld())
+        {
+            UObject* ObjectModel = *ObjectIterator;
+            Count ++;
+        }
+    }
+    
+    return Count;
 }
 
 
@@ -243,6 +260,229 @@ bool UNativeFunctionLibraryBPLibrary::FileToStringArray(TArray<FString>& Strings
 }
 
 
+//MARK: StringArrayToSorted
+TArray<FString> UNativeFunctionLibraryBPLibrary::StringArrayToSorted(const TArray<FString>& Strings)
+{
+    TArray<FString> SortedArray = Strings;
+    SortedArray.Sort();
+    return SortedArray;
+}
+
+
+//MARK: IntegerArrayToSorted
+TArray<int32> UNativeFunctionLibraryBPLibrary::IntegerArrayToSorted(const TArray<int32>& Integers)
+{
+    TArray<int32> SortedArray = Integers;
+    SortedArray.Sort();
+    return SortedArray;
+}
+
+
+//MARK: FloatArrayToSorted
+TArray<float> UNativeFunctionLibraryBPLibrary::FloatArrayToSorted(const TArray<float>& Floats)
+{
+    TArray<float> SortedArray = Floats;
+    SortedArray.Sort();
+    return SortedArray;
+}
+
+
+//MARK: CalculateMean
+float UNativeFunctionLibraryBPLibrary::CalculateMean(const TArray<float>& Data)
+{
+    int32 NumberOfElements = Data.Num();
+
+    if (NumberOfElements > 0)
+    {
+        float TotalValue = 0.f;
+
+        for (int32 i = 0; i < NumberOfElements; ++i)
+        {
+            TotalValue += Data[i];
+        }
+
+        return TotalValue / NumberOfElements;
+    }
+    else
+    {
+        return 0.f;
+    }
+}
+
+
+//MARK: CalculateWeightedMean
+float UNativeFunctionLibraryBPLibrary::CalculateWeightedMean(const TArray<float>& Data, const TArray<float>& Weights)
+{
+    int32 NumberOfWeightElements = Weights.Num();
+    int32 NumberOfDataElements = Data.Num();
+    float Divisor = 0.f;
+
+    if ((NumberOfDataElements > 0) && (NumberOfWeightElements == NumberOfDataElements))
+    {
+        float TotalValue = 0.f;
+
+        for (int32 i = 0; i < NumberOfDataElements; ++i)
+        {
+            TotalValue += (Data[i] * Weights[i]);
+        }       
+        for (int32 i = 0; i < NumberOfDataElements; ++i)
+        {
+            Divisor += Weights[i];
+        }
+
+        return TotalValue / Divisor;
+    }
+    else
+    {
+        return 0.f;
+    }
+}
+
+
+//MARK: CalculateMedian
+float UNativeFunctionLibraryBPLibrary::CalculateMedian(const TArray<float>& Data)
+{
+    TArray<float> SortedData = Data;
+
+    SortedData.Sort();
+
+    int32 NumberOfElements = SortedData.Num();  
+    float MedianValue = 0.f;
+
+    if (NumberOfElements > 1)
+    {
+        bool bIsEven = false;
+
+        if (NumberOfElements % 2 == 0)
+        {
+            bIsEven = true;
+        }
+
+        if (bIsEven)
+        {
+            int32 IndexA = NumberOfElements / 2;
+            int32 IndexB = IndexA - 1;
+
+            MedianValue = (SortedData[IndexA] + SortedData[IndexB]) / 2;
+        }
+        else
+        {
+            int32 MedianIndex = (NumberOfElements - 1) / 2;
+
+            MedianValue = SortedData[MedianIndex];
+        }
+    }
+
+    return MedianValue;
+}
+
+
+//MARK: CalculateStatisticalRange
+float UNativeFunctionLibraryBPLibrary::CalculateStatisticalRange(const TArray<float>& Data)
+{
+    if (Data.Num() > 1)
+    {
+        return FMath::Max(Data) - FMath::Min(Data);
+    }
+    else
+    {
+        return 0.f;
+    }
+}
+
+
+//MARK: CalculateStandardDeviation
+float UNativeFunctionLibraryBPLibrary::CalculateStandardDeviation(bool bPopulation, const TArray<float>& Data)
+{
+    int32 n = Data.Num();
+    float x = 0.f;
+    float XSquared = 0.f;
+    float SquaredSum = 0.f;
+    float Divisor = 0.f;
+
+    for (int32 i = 0; i < n; ++i)
+    {
+        x += Data[i];
+    }
+
+    XSquared = FMath::Square(x);
+
+    for (int32 i = 0; i < n; ++i)
+    {
+        SquaredSum += FMath::Square(Data[i]);
+    }
+
+    if (bPopulation)
+    {
+        Divisor = FMath::Square(n);
+    }
+    else
+    {
+        Divisor = (n * (n - 1));
+    }
+
+    return FMath::Sqrt(((n * SquaredSum) - XSquared) / Divisor);
+}
+
+
+//MARK: CalculateStatisticalZScore
+float UNativeFunctionLibraryBPLibrary::CalculateStatisticalZScore(float ObservedValue, float Mean, float StandardDeviation)
+{
+    return (ObservedValue - Mean) / StandardDeviation;
+}
+
+
+//MARK: CalculateRelativeRisk
+float UNativeFunctionLibraryBPLibrary::CalculateRelativeRisk(float PopulationSize, float WithoutExposure, float WithExposure, bool bPercentage)
+{
+    float RiskB = WithoutExposure / PopulationSize;
+    float RiskA = WithExposure / PopulationSize;
+    float RiskR = RiskA / RiskB;
+
+    if (bPercentage)
+    {
+        return RiskR * 100;
+    }
+    else
+    {
+        return RiskR;
+    }
+}
+
+
+//MARK: CalculateNumberOfPairs
+int32 UNativeFunctionLibraryBPLibrary::CalculateNumberOfPairs(int32 NumberOfElements)
+{
+    if (NumberOfElements > 1)
+    {
+    int32 nX = NumberOfElements;
+    int32 nY = nX - 1;
+
+    return (nX * nY) / 2;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+
+//MARK: CalculateLikelihood
+float UNativeFunctionLibraryBPLibrary::CalculateLikelihood(float Probability, int32 RepeatCount)
+{
+    float p = 1.0f - Probability;
+
+    if (RepeatCount > 0 && p > 0.f && p < 1.0f)
+    {
+        return 1.0f - (FMath::Pow(p, RepeatCount));
+    }
+    else
+    {
+        return 1.0f - p;
+    }
+}
+
+
 //MARK: FlushInputs
 void UNativeFunctionLibraryBPLibrary::FlushInputs(APlayerController* PlayerController)
 {
@@ -278,7 +518,7 @@ void UNativeFunctionLibraryBPLibrary::ClientFadeCamera(APlayerController* Player
 bool UNativeFunctionLibraryBPLibrary::LocationOnScreen(APlayerController* PlayerController, FVector Location)
 
 {
-    if(!GEngine && !PlayerController)
+    if (!GEngine && !PlayerController)
     {
         return false;
     } 
@@ -298,7 +538,7 @@ bool UNativeFunctionLibraryBPLibrary::LocationOnScreen(APlayerController* Player
     bool bBehindCamera = (DotProduct < 0);
     FVector2D ScreenPosition = FVector2D();    
 
-    if(bBehindCamera)
+    if (bBehindCamera)
     {
         FVector NewLocation = CameraLocation + Direction * -1.f;
 
@@ -312,7 +552,7 @@ bool UNativeFunctionLibraryBPLibrary::LocationOnScreen(APlayerController* Player
        PlayerController->ProjectWorldLocationToScreen(Location, ScreenPosition);
     }
 
-    if(ScreenPosition.X >= 0.f && ScreenPosition.X <= ViewportSize.X && ScreenPosition.Y >= 0.f && ScreenPosition.Y <= ViewportSize.Y && !bBehindCamera)
+    if (ScreenPosition.X >= 0.f && ScreenPosition.X <= ViewportSize.X && ScreenPosition.Y >= 0.f && ScreenPosition.Y <= ViewportSize.Y && !bBehindCamera)
     {
         return true;
     }
