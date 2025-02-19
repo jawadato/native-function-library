@@ -16,7 +16,6 @@ A handful of additional functions for Unreal Engine. Documentation and usage ins
 - Add the plugin into the Plugins directory of the newly created project. Open the uproject file and let the Editor compile the plugin using the VS build tools installed on your system.
 - For engine versions 5 and above, if you are relying on the Editor to compile the code then you may want to check the “Force Compilation at Startup” from the editor preferences otherwise you may need to manually compile the code every time you open the project.
 
-
 # Example Project
 
 - An [Example Project](https://jawadato.itch.io/native-function-library-example) is available.
@@ -25,10 +24,10 @@ A handful of additional functions for Unreal Engine. Documentation and usage ins
 
 ![nflb_uemp_scrn_001](https://github.com/user-attachments/assets/c574f41d-326f-4cc7-83f2-21c2d268f94b)
 
-# Discord
-
-Discord server available [here](https://discord.gg/mGbAhp56JX).
-
 # Documentation
 
 Documentation available [here](https://jawadato.github.io/native-function-library-docs).
+
+# Discord
+
+Discord server available [here](https://discord.gg/mGbAhp56JX).
