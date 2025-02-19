@@ -4,14 +4,6 @@ A handful of additional functions for Unreal Engine. Documentation and usage ins
 
 ![nflb_fab_scrn_002](https://github.com/user-attachments/assets/445f592a-3f37-4e11-b806-048eebf1feb2)
 
-# Discord
-
-Discord server available [here](https://discord.gg/mGbAhp56JX).
-
-# Documentation
-
-Documentation available [here](https://jawadato.github.io/native-function-library-docs).
-
 # From Release
 
 - Grab the prebuilt plugin from the [Unreal Marketplace](https://www.unrealengine.com/marketplace/en-US/profile/jawadato).
@@ -32,3 +24,11 @@ Documentation available [here](https://jawadato.github.io/native-function-librar
 - Project is compatible with engine versions 5.3 and higher.
 
 ![nflb_uemp_scrn_001](https://github.com/user-attachments/assets/c574f41d-326f-4cc7-83f2-21c2d268f94b)
+
+# Discord
+
+Discord server available [here](https://discord.gg/mGbAhp56JX).
+
+# Documentation
+
+Documentation available [here](https://jawadato.github.io/native-function-library-docs).
